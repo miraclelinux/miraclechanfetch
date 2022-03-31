@@ -794,7 +794,7 @@ image_source="auto"
 #       Hyperbola, iglunix, janus, Kali, KaOS, KDE_neon, Kibojoe, Kogaion, Korora,
 #       KSLinux, Kubuntu, LEDE, LaxerOS, LibreELEC, LFS, Linux_Lite, LMDE,
 #       Lubuntu, Lunar, macos, Mageia, MagpieOS, Mandriva, Manjaro, TeArch, Maui,
-#       Mer, Minix, LinuxMint, Live_Raizo, MX_Linux, Namib, Neptune, NetBSD,
+#       Mer, Minix, MIRACLE_LINUX, LinuxMint, Live_Raizo, MX_Linux, Namib, Neptune, NetBSD,
 #       Netrunner, Nitrux, NixOS, Nurunner, NuTyX, OBRevenge, OpenBSD,
 #       openEuler, OpenIndiana, openmamba, OpenMandriva, OpenStage, OpenWrt,
 #       osmc, Oracle, OS Elbrus, PacBSD, Parabola, Pardus, Parrot, Parsix,
@@ -4071,7 +4071,7 @@ print_ascii() {
         line=${line//\\\\/\\}
         line=${line//█/ }
         ((++lines,${#line}>ascii_len)) && ascii_len="${#line}"
-    done <<< "${ascii_data//\$\{??\}}"
+    done <<< $(echo "${ascii_data//\$\{??\}}"|sed s/'\${c[0-9][0-9]}'//g)
 
     # Fallback if file not found.
     ((lines==1)) && {
@@ -4090,6 +4090,21 @@ print_ascii() {
     ascii_data="${ascii_data//\$\{c4\}/$c4}"
     ascii_data="${ascii_data//\$\{c5\}/$c5}"
     ascii_data="${ascii_data//\$\{c6\}/$c6}"
+    ascii_data="${ascii_data//\$\{c7\}/$c7}"
+    ascii_data="${ascii_data//\$\{c8\}/$c8}"
+    ascii_data="${ascii_data//\$\{c9\}/$c9}"
+    ascii_data="${ascii_data//\$\{c10\}/$c10}"
+    ascii_data="${ascii_data//\$\{c11\}/$c11}"
+    ascii_data="${ascii_data//\$\{c12\}/$c12}"
+    ascii_data="${ascii_data//\$\{c13\}/$c13}"
+    ascii_data="${ascii_data//\$\{c14\}/$c14}"
+    ascii_data="${ascii_data//\$\{c15\}/$c15}"
+    ascii_data="${ascii_data//\$\{c16\}/$c16}"
+    ascii_data="${ascii_data//\$\{c17\}/$c17}"
+    ascii_data="${ascii_data//\$\{c18\}/$c18}"
+    ascii_data="${ascii_data//\$\{c19\}/$c19}"
+    ascii_data="${ascii_data//\$\{c20\}/$c20}"
+    ascii_data="${ascii_data//\$\{c21\}/$c21}"
 
     ((text_padding=ascii_len+gap))
     printf '%b\n' "$ascii_data${reset}"
@@ -4683,6 +4698,32 @@ set_colors() {
     [[ "$color_text" != "off" ]] && set_text_colors "$@"
 }
 
+set_back_colors() {
+    c1="$(back_color "$1")${ascii_bold}"
+    c2="$(back_color "$2")${ascii_bold}"
+    c3="$(back_color "$3")${ascii_bold}"
+    c4="$(back_color "$4")${ascii_bold}"
+    c5="$(back_color "$5")${ascii_bold}"
+    c6="$(back_color "$6")${ascii_bold}"
+    c7="$(back_color "$7")${ascii_bold}"
+    c8="$(back_color "$8")${ascii_bold}"
+    c9="$(back_color "$9")${ascii_bold}"
+    c10="$(back_color "${10}")${ascii_bold}"
+    c11="$(back_color "${11}")${ascii_bold}"
+    c12="$(back_color "${12}")${ascii_bold}"
+    c13="$(back_color "${13}")${ascii_bold}"
+    c14="$(back_color "${14}")${ascii_bold}"
+    c15="$(back_color "${15}")${ascii_bold}"
+    c16="$(back_color "${16}")${ascii_bold}"
+    c17="$(back_color "${17}")${ascii_bold}"
+    c18="$(back_color "${18}")${ascii_bold}"
+    c19="$(back_color "${19}")${ascii_bold}"
+    c20="$(back_color "${20}")${ascii_bold}"
+    c21="$(back_color "${21}")${ascii_bold}"
+
+    [[ "$color_text" != "off" ]] && set_text_colors "$@"
+}
+
 set_text_colors() {
     if [[ "${colors[0]}" == "distro" ]]; then
         title_color="$(color "$1")"
@@ -4730,13 +4771,21 @@ color() {
     esac
 }
 
+back_color() {
+    case $1 in
+        [0-6])    printf '%b\e[4%sm'   "$reset" "$1" ;;
+        7 | "bg") printf '\e[47m%b'    "$reset" ;;
+        *)        printf '\e[48;5;%bm' "$1" ;;
+    esac
+}
+
 # OTHER
 
 stdout() {
     image_backend="off"
     unset subtitle_color colon_color info_color underline_color bold title_color at_color \
           text_padding zws reset color_blocks bar_color_elapsed bar_color_total \
-          c1 c2 c3 c4 c5 c6 c7 c8
+          c1 c2 c3 c4 c5 c6 c7 c8 c9 c10 c11 c12 c13 c14 c15 c16 c17 c18 c19 c20 c21
 }
 
 err() {
@@ -5153,7 +5202,7 @@ ASCII:
                                 GoboLinux, Grombyang, Guix, Haiku, Huayra, Hyperbola, iglunix, janus, Kali,
                                 KaOS, KDE_neon, Kibojoe, Kogaion, Korora, KSLinux, Kubuntu, LEDE,
                                 LaxerOS, LibreELEC, LFS, Linux_Lite, LMDE, Lubuntu, Lunar, macos,
-                                Mageia, MagpieOS, Mandriva, Manjaro, TeArch, Maui, Mer, Minix, LinuxMint,
+                                Mageia, MagpieOS, Mandriva, Manjaro, TeArch, Maui, Mer, Minix, MIRACLE_LINUX, LinuxMint,
                                 Live_Raizo, MX_Linux, Namib, Neptune, NetBSD, Netrunner, Nitrux,
                                 NixOS, Nurunner, NuTyX, OBRevenge, OpenBSD, openEuler, OpenIndiana,
                                 openmamba, OpenMandriva, OpenStage, OpenWrt, osmc, Oracle,
@@ -8675,6 +8724,30 @@ ${c2}   -sdhyo+:-`                -/syymm:
        ../-yNMMy--/::/-.sMMmos+.`
            -+oyhNsooo+omy/```
               `::ohdmds-`
+EOF
+        ;;
+
+        "MIRACLE LINUX"* | "MIRACLE_LINUX"*)
+            set_back_colors 35 28 22 144 223 53 211 15 228 114 0 187 138 132 168 125 188 179 72 115 255
+            read -rd '' ascii_data <<'EOF'
+${c1}  ${c11}  ${c2}  ${c11}            ${c1}  ${c11}  ${c2}  ${c11}
+${c2}    ${c3}  ${c12}            ${c2}    ${c3}  ${c11}
+  ${c3}  ${c12}                ${c3}  ${c11}
+${c4}  ${c12}      ${c4}  ${c12}    ${c4}  ${c12}    ${c4}    ${c11}
+${c12}  ${c4}  ${c12}  ${c13}  ${c5}  ${c4}    ${c5}  ${c12}    ${c4}  ${c12}  ${c11}
+${c12}  ${c4}  ${c13}  ${c5}  ${c6}  ${c5}    ${c6}  ${c5}  ${c12}  ${c4}  ${c12}  ${c11}
+${c12}  ${c4}    ${c5}  ${c14}  ${c5}    ${c14}  ${c5}  ${c4}    ${c12}  ${c11}
+${c12}  ${c11}  ${c5}                ${c11}  ${c12}  ${c11}
+${c12}  ${c11}    ${c7}  ${c15}  ${c8}  ${c9}  ${c7}  ${c15}  ${c11}    ${c12}  ${c11}
+${c12}  ${c11}  ${c5}  ${c15}  ${c16}  ${c9}  ${c18}  ${c15}  ${c16}  ${c5}  ${c11}  ${c12}  ${c11}
+  ${c5}    ${c3}    ${c8}  ${c17}  ${c3}    ${c5}    ${c11}
+  ${c5}  ${c1}  ${c3}    ${c8}  ${c17}  ${c3}      ${c5}  ${c11}
+${c5}  ${c1}  ${c3}  ${c19}  ${c1}  ${c3}      ${c19}  ${c3}  ${c1}  ${c5}  ${c11}
+  ${c8}  ${c20}    ${c19}  ${c3}    ${c19}  ${c20}    ${c21}  ${c11}
+    ${c21}  ${c8}  ${c21}  ${c8}  ${c21}    ${c8}  ${c21}  ${c11}
+      ${c5}            ${c11}
+      ${c8}  ${c21}  ${c17}  ${c8}  ${c21}  ${c17}  ${c11}
+      ${c7}  ${c15}    ${c7}  ${c15}    ${c11}
 EOF
         ;;
 

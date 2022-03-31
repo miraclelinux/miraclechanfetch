@@ -1,6 +1,3 @@
-miraclechanfetch is derived from neofetch under MIT license.
-miraclechanfetch is also licensed under MIT license.
-
 The MIT License (MIT)
 
 Copyright (c) 2015-2021 Dylan Araps
