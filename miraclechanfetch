@@ -4774,7 +4774,7 @@ color() {
 back_color() {
     case $1 in
         [0-6])    printf '%b\e[4%sm'   "$reset" "$1" ;;
-        7 | "bg") printf '\e[47m%b'    "$reset" ;;
+        7 | "bg") printf '\e[49m%b'    "$reset" ;;
         *)        printf '\e[48;5;%bm' "$1" ;;
     esac
 }
@@ -8728,7 +8728,7 @@ EOF
         ;;
 
         "MIRACLE LINUX"* | "MIRACLE_LINUX"*)
-            set_back_colors 35 28 22 144 223 53 211 15 228 114 0 187 138 132 168 125 188 179 72 115 255
+            set_back_colors 35 28 22 144 223 53 211 15 228 114 7 187 138 132 168 125 188 179 72 115 255
             read -rd '' ascii_data <<'EOF'
 ${c1}  ${c11}  ${c2}  ${c11}            ${c1}  ${c11}  ${c2}  ${c11}
 ${c2}    ${c3}  ${c12}            ${c2}    ${c3}  ${c11}
